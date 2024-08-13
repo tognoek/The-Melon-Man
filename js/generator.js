@@ -1,25 +1,25 @@
 game.structures = {
 	"grassPlatform": [
-		{tileColumn: 0, tileRow: 0, x: 0, y: 0}, {tileColumn: 5, tileRow: 1, x: 0, y: -1, collidable: false},
-		{tileColumn: 1, tileRow: 0, x: 1, y: 0}, {tileColumn: 5, tileRow: 1, x: 1, y: -1, collidable: false},
-		{tileColumn: 2, tileRow: 0, x: 2, y: 0}, {tileColumn: 5, tileRow: 1, x: 2, y: -1, collidable: false}
+		{ tileColumn: 0, tileRow: 0, x: 0, y: 0 }, { tileColumn: 5, tileRow: 1, x: 0, y: -1, collidable: false },
+		{ tileColumn: 1, tileRow: 0, x: 1, y: 0 }, { tileColumn: 5, tileRow: 1, x: 1, y: -1, collidable: false },
+		{ tileColumn: 2, tileRow: 0, x: 2, y: 0 }, { tileColumn: 5, tileRow: 1, x: 2, y: -1, collidable: false }
 	],
-	"snowPlatform": [{tileColumn: 0, tileRow: 1, x: 0, y: 0}, {tileColumn: 1, tileRow: 1, x: 1, y: 0}, {tileColumn: 2, tileRow: 1, x: 2, y: 0}],
-	"gelPlatform": [{tileColumn: 3, tileRow: 1, x: 0, y: 0}, {tileColumn: 4, tileRow: 1, x: 1, y: 0}],
-	"seaWeedPlatform": [{tileColumn: 0, tileRow: 2, x: 0, y: 0}, {tileColumn: 0, tileRow: 3, x: 0, y: 1}],
-	"eyePlatform_1": [{tileColumn: 1, tileRow: 2, x: 0, y: 0}, {tileColumn: 2, tileRow: 2, x: 1, y: 0}],
-	"eyePlatform_2": [{tileColumn: 1, tileRow: 3, x: 0, y: 0}, {tileColumn: 2, tileRow: 3, x: 1, y: 0}],
-	"eyePlatform_3": [{tileColumn: 1, tileRow: 2, x: 0, y: 0}, {tileColumn: 2, tileRow: 3, x: 1, y: 0}],
-	"eyePlatform_4": [{tileColumn: 1, tileRow: 3, x: 0, y: 0}, {tileColumn: 2, tileRow: 2, x: 1, y: 0}],
+	"snowPlatform": [{ tileColumn: 0, tileRow: 1, x: 0, y: 0 }, { tileColumn: 1, tileRow: 1, x: 1, y: 0 }, { tileColumn: 2, tileRow: 1, x: 2, y: 0 }],
+	"gelPlatform": [{ tileColumn: 3, tileRow: 1, x: 0, y: 0 }, { tileColumn: 4, tileRow: 1, x: 1, y: 0 }],
+	"seaWeedPlatform": [{ tileColumn: 0, tileRow: 2, x: 0, y: 0 }, { tileColumn: 0, tileRow: 3, x: 0, y: 1 }],
+	"eyePlatform_1": [{ tileColumn: 1, tileRow: 2, x: 0, y: 0 }, { tileColumn: 2, tileRow: 2, x: 1, y: 0 }],
+	"eyePlatform_2": [{ tileColumn: 1, tileRow: 3, x: 0, y: 0 }, { tileColumn: 2, tileRow: 3, x: 1, y: 0 }],
+	"eyePlatform_3": [{ tileColumn: 1, tileRow: 2, x: 0, y: 0 }, { tileColumn: 2, tileRow: 3, x: 1, y: 0 }],
+	"eyePlatform_4": [{ tileColumn: 1, tileRow: 3, x: 0, y: 0 }, { tileColumn: 2, tileRow: 2, x: 1, y: 0 }],
 	"manHoldingPlatform": [
-		{tileColumn: 3, tileRow: 2, x: 0, y: 0}, {tileColumn: 4, tileRow: 2, x: 1, y: 0},
-		{tileColumn: 3, tileRow: 3, x: 0, y: 1, collidable: false}, {tileColumn: 4, tileRow: 3, x: 1, y: 1, collidable: false}
+		{ tileColumn: 3, tileRow: 2, x: 0, y: 0 }, { tileColumn: 4, tileRow: 2, x: 1, y: 0 },
+		{ tileColumn: 3, tileRow: 3, x: 0, y: 1, collidable: false }, { tileColumn: 4, tileRow: 3, x: 1, y: 1, collidable: false }
 	],
-	"snowman": [{tileColumn: 5, tileRow: 3, x: 0, y: 0, collidable: false}, {tileColumn: 5, tileRow: 2, x: 0, y: -1, collidable: false}],
-  "lava_platform": [
-			{tileColumn: 6, tileRow: 1, x: -1, y: -0.9, collidable: false},{tileColumn: 7, tileRow: 1, x: 0, y: -0.9, collidable: false}, {tileColumn: 8, tileRow: 1, x: 1, y: -0.9, collidable: false},
-			{tileColumn: 0, tileRow: 4, x: -1, y: 0},{tileColumn: 1, tileRow: 4, x: 0, y: 0}, {tileColumn: 2, tileRow: 4, x: 1, y: 0},
-			{tileColumn: 0, tileRow: 5, x: -1, y: 1, collidable: false},{tileColumn: 1, tileRow: 5, x: 0, y: 1, collidable: false}, {tileColumn: 2, tileRow: 5, x: 1, y: 1, collidable: false}
+	"snowman": [{ tileColumn: 5, tileRow: 3, x: 0, y: 0, collidable: false }, { tileColumn: 5, tileRow: 2, x: 0, y: -1, collidable: false }],
+	"lava_platform": [
+		{ tileColumn: 6, tileRow: 1, x: -1, y: -0.9, collidable: false }, { tileColumn: 7, tileRow: 1, x: 0, y: -0.9, collidable: false }, { tileColumn: 8, tileRow: 1, x: 1, y: -0.9, collidable: false },
+		{ tileColumn: 0, tileRow: 4, x: -1, y: 0 }, { tileColumn: 1, tileRow: 4, x: 0, y: 0 }, { tileColumn: 2, tileRow: 4, x: 1, y: 0 },
+		{ tileColumn: 0, tileRow: 5, x: -1, y: 1, collidable: false }, { tileColumn: 1, tileRow: 5, x: 0, y: 1, collidable: false }, { tileColumn: 2, tileRow: 5, x: 1, y: 1, collidable: false }
 	]
 }
 

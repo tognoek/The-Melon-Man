@@ -58,7 +58,8 @@ var game = {
 			}
 	},
 	sounds: {
-		jump: new Audio('sounds/jump.wav')
+		jump: new Audio('sounds/jump.wav'),
+		run: [new Audio('sounds/grass_0.wav'), new Audio('sounds/grass_1.wav')]
 	},
 	options: {
 		texturesPath: "textures.png",
@@ -75,6 +76,7 @@ var game = {
 		canvasWidth: window.innerWidth / 3,
 		canvasHeight: window.innerHeight / 3
 	},
+	randomElement: arr => arr[Math.floor(Math.random() * arr.length)],
 	pressedKeys: {},
 	init: function (onInit) {
 		this.canvas.width = this.options.canvasWidth

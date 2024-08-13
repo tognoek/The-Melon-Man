@@ -1,3 +1,4 @@
+
 // Functions responsible for keyboard events handling
 game.moveLeft = function () {
 	game.clearMoveIntervals()
@@ -12,6 +13,7 @@ game.moveLeft = function () {
 				if (game.player.isInAir) {
 					game.player.x -= 0.2
 				} else {
+					game.randomElement(game.sounds.run).play()
 					game.player.x -= 0.1
 				}
 				game.requestRedraw()
@@ -37,6 +39,7 @@ game.moveRight = function () {
 				if (game.player.isInAir) {
 					game.player.x += 0.2
 				} else {
+					game.randomElement(game.sounds.run).play()
 					game.player.x += 0.1
 				}
 				game.requestRedraw()
