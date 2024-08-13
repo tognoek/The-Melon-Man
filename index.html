@@ -2,19 +2,22 @@
 <html lang="en" >
   <head>
     <meta charset="UTF-8">
-    <title> The melon man </title>
+    <title> The Mask Dude</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div class="game">
+      <p class="current_point" id="current_point">Current points: 0</p>
+      <p class="point" id="point">Points: 0</p>
+      <p class="max_point" id="max_point">Max points: 0</p>
       <canvas id="canvas"></canvas>
       <div class="mobileControls">
-        <button class="mobileControls__button" onmousedown="game.moveLeft()" ontouchstart="game.moveLeft()" onmouseup="clearInterval(game.player.moveLeftInterval" ontouchend="clearInterval(game.player.moveInterval)">Left</button>
+        <button class="mobileControls__button" onmousedown="game.moveLeft()" ontouchstart="game.moveLeft()" onmouseup="clearInterval(game.player.moveLeftInterval)" ontouchend="clearInterval(game.player.moveInterval)">Left</button>
         <button class="mobileControls__button" onmousedown="game.moveRight()" ontouchstart="game.moveRight()" onmouseup="clearInterval(game.player.moveRightInterval)" ontouchend="clearInterval(game.player.moveInterval)">Right</button>
         <button class="mobileControls__button" onmousedown="game.player.jump()" ontouchstart="game.player.jump()">Jump</button>
       </div>
-      <p class="counter" id="counter">A game by Karol Swierczek | Controls: W, D / arrows and SPACE | Points: 0</p>
+      <p class="counter" id="counter">A game by Karol Swierczek | Controls: W, D / arrows and SPACE</p>
     </div>
     <script src="js/index.js"></script>
     <script src="js/player.js"></script>
@@ -40,7 +43,7 @@
       })
     </script>
     <audio controls loop autoplay hidden>
-      <source src="sounds/music.mp3" type="audio/mpeg">
+      <!-- <source src="sounds/music.mp3" type="audio/mpeg"> -->
       Your browser does not support the audio element.
     </audio>
   </body>

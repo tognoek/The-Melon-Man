@@ -3,7 +3,8 @@ game.player = {
 		y: 0,
 		height: 24,
 		highestY: 0,
-		direction: "left",
+		direction: "idle",
+		vectorX: 1,
 		isInAir: false,
 		startedJump: false,
 		moveInterval: null,
@@ -16,6 +17,7 @@ game.player = {
 					}
 					if (time > 37) {
 						this.startedJump = false
+						game.player.direction = "fall"
 						game.checkCollisions()
 					}
 					if (time < 150) {
@@ -35,11 +37,16 @@ game.player = {
 		collidesWithGround: true,
 		animations: {
 			// Describe coordinates of consecutive animation frames of objects in textures
-			left: [{tileColumn: 4, tileRow: 0}, {tileColumn: 5, tileRow: 0}, {tileColumn: 4, tileRow: 0}, {tileColumn: 6, tileRow: 0}],
-			right: [{tileColumn: 9, tileRow: 0}, {tileColumn: 8, tileRow: 0}, {tileColumn: 9, tileRow: 0}, {tileColumn: 7, tileRow: 0}]
+			run: 12,
+			idle: 11,
+			jump: 1,
+			doublejump: 6,
+			fall : 1	
 		},
 		jump: function (type) {
 			if (!this.isInAir) {
+				game.player.direction = "jump";
+				game.player.animationFrameNumber = 0;
 				clearInterval(this.fallInterval)
 				game.sounds.jump.play()
 				this.isInAir = true
@@ -55,3 +62,13 @@ game.player = {
 			}
 		}
 	}
+
+	function loop() {
+		if (game.player.direction == "idle"){
+			game.player.animationFrameNumber++
+			game.requestRedraw()
+		}
+		game.offset++
+	}
+	
+	setInterval(loop, 60);

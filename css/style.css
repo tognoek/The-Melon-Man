@@ -48,7 +48,36 @@ canvas {
   text-align: center;
   z-index: 2;
 }
-
+.current_point {
+  font-family: 'superscript', Arial, sans-serif;
+  font-size: 22px;
+  color: black;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  text-align: center;
+  z-index: 2;
+}
+.point {
+  font-family: 'superscript', Arial, sans-serif;
+  font-size: 22px;
+  color: black;
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  text-align: center;
+  z-index: 2;
+}
+.max_point {
+  font-family: 'superscript', Arial, sans-serif;
+  font-size: 22px;
+  color: black;
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  text-align: center;
+  z-index: 2;
+}
 .mobileControls {
   position: absolute;
   bottom: 25px;

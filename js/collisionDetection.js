@@ -26,6 +26,11 @@ game.checkCollisions = function () {
 			) {
 				clearInterval(game.player.fallInterval)
 				game.player.isInAir = false
+				game.player.countJump = 0;
+				if (game.player.direction == "fall"){
+					game.player.direction = "idle";
+					game.player.animationFrameNumber = 0;
+				}
 				game.player.y = Math.round(game.player.y / game.options.tileHeight) * game.options.tileHeight
 				return true
 			}

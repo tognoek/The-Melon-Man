@@ -1,9 +1,12 @@
 // Functions responsible for keyboard events handling
 game.moveLeft = function () {
-	game.player.direction = "left"
 	game.clearMoveIntervals()
 	game.player.moveLeftInterval = setInterval(function () {
-		for (var i = 1; i < 120; i++) {
+		if (game.player.direction == "idle"){
+			game.player.direction = "run";
+			game.player.animationFrameNumber = 0;
+		}
+		for (var i = 1; i < 60; i++) {
 			setTimeout(function () {
 				// Player can't move faster if there's friction from the ground
 				if (game.player.isInAir) {
@@ -19,14 +22,17 @@ game.moveLeft = function () {
 			}, 3 * i)
 		}
 		game.player.animationFrameNumber++
-	}, 120)
+	}, 60)
 }
 
 game.moveRight = function () {
-	game.player.direction = "right"
 	game.clearMoveIntervals()
 	game.player.moveRightInterval = setInterval(function () {
-		for (var i = 1; i < 120; i++) {
+		if (game.player.direction == "idle"){
+			game.player.direction = "run";
+			game.player.animationFrameNumber = 0;
+		}
+		for (var i = 1; i < 60; i++) {
 			setTimeout(function () {
 				if (game.player.isInAir) {
 					game.player.x += 0.2
@@ -40,7 +46,7 @@ game.moveRight = function () {
 			}.bind(game), 3 * i)
 		}
 		game.player.animationFrameNumber++
-	}, 120)
+	}, 60)
 }
 
 game.clearMoveIntervals = function () {
@@ -54,10 +60,12 @@ game.keydown = function (event) {
 		case 65:
 		case 37:
 			game.moveLeft()
+			game.player.vectorX = -1
 			break
 		case 68:
 		case 39:
 			game.moveRight()
+			game.player.vectorX = 1
 			break
 		case 32:
 			game.player.jump()
@@ -73,10 +81,14 @@ game.keyup = function (event) {
 		case 65:
 		case 37:
 			clearInterval(game.player.moveLeftInterval)
+			game.player.direction = "idle";
+			game.player.animationFrameNumber = 0;
 			break
 		case 68:
 		case 39:
 			clearInterval(game.player.moveRightInterval)
+			game.player.direction = "idle";
+			game.player.animationFrameNumber = 0;
 			break
 		}
 }

@@ -2,11 +2,11 @@
 
 game.drawTile = function (tileColumn, tileRow, x, y) {
 	game.context.drawImage(
-		game.textures,
-		tileColumn * game.options.tileWidth,
-		tileRow * game.options.tileHeight,
-		game.options.tileWidth,
-		game.options.tileHeight,
+		game.content,
+		tileColumn * game.options.maptileWidth,
+		tileRow * game.options.maptileHeight,
+		game.options.maptileWidth,
+		game.options.maptileHeight,
 		x * game.options.tileWidth - Math.round(game.player.x) + Math.round(game.options.canvasWidth / 2 + game.options.tileWidth / 2),
 		y * game.options.tileHeight - Math.round(game.player.y) + Math.round(game.options.canvasHeight / 2 + game.options.tileHeight / 2),
 		game.options.tileWidth,
@@ -22,32 +22,49 @@ game.drawStructure = function (name, x, y) {
 }
 
 game.drawPlayer = function () {
-	actualPlayerTile = game.player.animations[game.player.direction][game.player.animationFrameNumber % 4]
-	game.context.drawImage(
-		game.textures,
-		actualPlayerTile.tileColumn * game.options.tileWidth,
-		actualPlayerTile.tileRow * game.options.tileHeight,
-		game.options.tileWidth,
-		game.options.tileHeight,
-		Math.round(game.options.canvasWidth / 2 - game.options.tileWidth / 2),
-		Math.round(game.options.canvasHeight / 2 - game.options.tileHeight / 2),
-		game.options.tileWidth,
-		game.options.tileHeight
-	)
+	// actualPlayerTile = game.player.animations[game.player.direction][game.player.animationFrameNumber % 4]
+	game.player.animationFrameNumber = game.player.animationFrameNumber % Math.floor(game.player.animations[game.player.direction] * game.textures[game.player.direction].ratioFrame)
+	if (game.textures[game.player.direction].loaded) {
+		game.context.save();
+		game.context.scale(game.player.vectorX, 1);
+		if (game.player.vectorX < 0){
+			game.context.translate(-game.options.canvasWidth, 0);
+		}
+		game.context.drawImage(
+			game.textures[game.player.direction].image,
+			Math.floor(game.player.animationFrameNumber / game.textures[game.player.direction].ratioFrame) * game.options.tileWidth,
+			0 * game.options.tileHeight,
+			game.options.tileWidth,
+			game.options.tileHeight,
+			Math.round(game.options.canvasWidth / 2 - game.options.tileWidth / 2),
+			Math.round(game.options.canvasHeight / 2 - game.options.tileHeight / 2),
+			game.options.tileWidth,
+			game.options.tileHeight
+		)
+		game.context.restore();
+	}
 }
 
 game.redraw = function () {
 	game.drawPending = false
 
+	game.context.fillRect(0, 0, game.canvas.width, game.canvas.height)
+
 	// Draw the background
 	if (game.backgrounds['sky'].loaded) {
-		var pattern = game.context.createPattern(game.backgrounds['sky'].image, 'repeat') // Create a pattern with this image, and set it to "repeat".
-		game.context.fillStyle = pattern
+		var width = game.backgrounds['sky'].image.width
+		var height = game.backgrounds['sky'].image.height
+		game.offset %= width
+		for (var i = 0; i < 5; i++){
+			for (var t = 0; t < 5; t++){
+				game.context.drawImage(game.backgrounds['sky'].image, i * width - game.offset, t * height)
+			}
+		}
+		// var pattern = game.context.createPattern(game.backgrounds['sky'].image, 'repeat')
+		// game.context.fillStyle = pattern
 	} else {
 		game.context.fillStyle = "#78c5ff"
 	}
-
-	game.context.fillRect(0, 0, game.canvas.width, game.canvas.height)
 
 	if (game.backgrounds['trees'].loaded) {
 		game.context.drawImage(game.backgrounds['trees'].image, 0, game.canvas.height / 2 - game.player.y / 10, 332, 180)
@@ -75,7 +92,11 @@ game.redraw = function () {
 
 	// Draw the player
 	game.drawPlayer()
-
+	game.currentPoint.innerHTML = "Current points: " + Math.round(-game.player.y / (3 * game.options.tileHeight))
+	game.point.innerHTML = "Points: " + Math.round(-game.player.highestY / (3 * game.options.tileHeight))
+	game.numberMaxPoint = Math.max(game.numberMaxPoint, Math.round(-game.player.highestY / (3 * game.options.tileHeight)))
+	game.maxPoint.innerHTML = "Max points: " + game.numberMaxPoint
+	document.cookie = "numberMaxPoint=" + game.numberMaxPoint
 	game.counter.innerHTML = "A game by Karol Swierczek | Controls: A, D / arrows and SPACE | Points: " + Math.round(-game.player.highestY / (3 * game.options.tileHeight)), game.canvas.width - 50, game.canvas.height - 12
 }
 
@@ -85,7 +106,7 @@ game.requestRedraw = function () {
 		requestAnimationFrame(game.redraw)
 	}
 
-	if(game.isOver) {
+	if (game.isOver) {
 		clearInterval(this.player.fallInterval)
 		game.context.font = "30px superscript"
 		game.context.textAlign = "center"
