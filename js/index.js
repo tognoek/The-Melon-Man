@@ -42,7 +42,7 @@ var game = {
 		'doublejump': {
 			image: new Image(),
             loaded: false,
-			ratioFrame: 1
+			ratioFrame: 5
         }
 
 	},

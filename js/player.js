@@ -7,11 +7,22 @@ game.player = {
 		vectorX: 1,
 		isInAir: false,
 		startedJump: false,
+		countJump: 0,
 		moveInterval: null,
 		fallTimeout: function(startingY, time, maxHeight) {
 			setTimeout( function () {
 				if (this.isInAir) {
+					if (this.countJump == 2){
+						time = 0;
+						startingY = this.y
+						this.countJump = -1
+					}
 					this.y = startingY - maxHeight + Math.pow((-time / 3 + 11), 2)
+					game.player.animationFrameNumber++;
+					if (game.player.animationFrameNumber >= game.player.animations['doublejump'] * game.textures["doublejump"].ratioFrame){
+						game.player.direction = "jump";
+						game.player.animationFrameNumber = 0;
+					}
 					if (this.y < this.highestY) {
 						this.highestY = this.y
 					}
@@ -57,8 +68,18 @@ game.player = {
 				if (type == "fall") {
 					time = 30
 					maxHeight = 0
+				}else{
+					if (this.countJump == 0) {
+						this.countJump = 1
+					}
 				}
 				this.fallTimeout(startingY, time, maxHeight)
+			}else{
+				if (this.countJump == 1 && type == undefined){
+					this.countJump = 2
+					game.player.direction = "doublejump";
+					game.player.animationFrameNumber = 0;
+				}
 			}
 		}
 	}
