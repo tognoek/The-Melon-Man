@@ -15,6 +15,25 @@ game.drawTile = function (tileColumn, tileRow, x, y) {
 }
 
 game.drawStructure = function (name, x, y) {
+	var widthElement = game.options.maptileWidth * 3;
+	var heighthElement = game.options.maptileHeight * 2; 
+	for (var i = 0; i < 7; i++){
+		var widthLava = Math.floor(Math.random() * 4) - 4;
+		while (widthLava < game.options.canvasWidth) {
+			game.context.drawImage(
+				game.content,
+				game.structures["lava"][0].tileColumn *  game.options.maptileWidth,
+				game.structures["lava"][0].tileRow * game.options.maptileHeight,
+				widthElement,
+				heighthElement,
+				widthLava,
+				game.options.canvasHeight - heighthElement - game.yLava + i * heighthElement / 2,
+				widthElement,
+				heighthElement
+			)
+			widthLava += widthElement;
+		}
+	}
 	var structure = game.structures[name]
 	for (var i = 0; i < structure.length; i++) {
 		game.drawTile(structure[i].tileColumn, structure[i].tileRow, structure[i].x + x, structure[i].y + y)
@@ -54,7 +73,8 @@ game.redraw = function () {
 	if (game.backgrounds['sky'].loaded) {
 		var width = game.backgrounds['sky'].image.width
 		var height = game.backgrounds['sky'].image.height
-		game.offset %= width
+		game.offset = game.offset % width
+		// console.log(width)
 		for (var i = 0; i < 5; i++){
 			for (var t = 0; t < 5; t++){
 				game.context.drawImage(game.backgrounds['sky'].image, i * width - game.offset, t * height)
@@ -84,16 +104,20 @@ game.redraw = function () {
 			structuresToDraw.push(game.map.structures[i])
 		}
 	}
-
+	for (var i = 0; i < game.traps.structures.length; i++) {
+		structuresToDraw.push(game.traps.structures[i])
+	}
 	// Draw them
 	for (var i = 0; i < structuresToDraw.length; i++) {
+		// console.log(structuresToDraw[i].name, structuresToDraw[i].x, structuresToDraw[i].y)
 		game.drawStructure(structuresToDraw[i].name, structuresToDraw[i].x, structuresToDraw[i].y)
 	}
 
 	// Draw the player
 	game.drawPlayer()
 	game.currentPoint.innerHTML = "Current points: " + Math.round(-game.player.y / (3 * game.options.tileHeight))
-	game.point.innerHTML = "Points: " + Math.round(-game.player.highestY / (3 * game.options.tileHeight))
+	game.ponits = Math.round(-game.player.highestY / (3 * game.options.tileHeight))
+	game.point.innerHTML = "Points: " + game.ponits
 	game.numberMaxPoint = Math.max(game.numberMaxPoint, Math.round(-game.player.highestY / (3 * game.options.tileHeight)))
 	game.maxPoint.innerHTML = "Max points: " + game.numberMaxPoint
 	document.cookie = "numberMaxPoint=" + game.numberMaxPoint

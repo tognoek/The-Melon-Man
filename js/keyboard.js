@@ -1,6 +1,8 @@
 
 // Functions responsible for keyboard events handling
 game.moveLeft = function () {
+	if (game.isOver) return
+	game.player.vectorX = -1
 	game.clearMoveIntervals()
 	game.player.moveLeftInterval = setInterval(function () {
 		if (game.player.direction == "idle"){
@@ -28,6 +30,8 @@ game.moveLeft = function () {
 }
 
 game.moveRight = function () {
+	if (game.isOver) return
+	game.player.vectorX = 1
 	game.clearMoveIntervals()
 	game.player.moveRightInterval = setInterval(function () {
 		if (game.player.direction == "idle"){
@@ -58,17 +62,16 @@ game.clearMoveIntervals = function () {
 }
 
 game.keydown = function (event) {
+	if (game.isOver) return;
 	if (!game.pressedKeys[event.keyCode]) { // Prevent key repeating
 		switch (event.keyCode) {
 		case 65:
 		case 37:
 			game.moveLeft()
-			game.player.vectorX = -1
 			break
 		case 68:
 		case 39:
 			game.moveRight()
-			game.player.vectorX = 1
 			break
 		case 32:
 			game.player.jump()

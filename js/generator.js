@@ -20,7 +20,18 @@ game.structures = {
 		{ tileColumn: 6, tileRow: 1, x: -1, y: -0.9, collidable: false }, { tileColumn: 7, tileRow: 1, x: 0, y: -0.9, collidable: false }, { tileColumn: 8, tileRow: 1, x: 1, y: -0.9, collidable: false },
 		{ tileColumn: 0, tileRow: 4, x: -1, y: 0 }, { tileColumn: 1, tileRow: 4, x: 0, y: 0 }, { tileColumn: 2, tileRow: 4, x: 1, y: 0 },
 		{ tileColumn: 0, tileRow: 5, x: -1, y: 1, collidable: false }, { tileColumn: 1, tileRow: 5, x: 0, y: 1, collidable: false }, { tileColumn: 2, tileRow: 5, x: 1, y: 1, collidable: false }
-	]
+	],
+	"knife" : [{tileColumn: 6, tileRow: 3, x: 0, y: 0, collidable: true}, { tileColumn: 6, tileRow: 2, x: 0, y: -1, collidable: true }],
+	"lava" : [{tileColumn: 4, tileRow: 4, x: 0, y: 0, collidable: true}]
+}
+game.genrateTraps = function () {
+	if (game.offset % 31 == 0){
+		this.traps.structures.push({
+			name : "knife",
+			x: game.player.x / game.options.tileHeight + Math.floor(Math.random() * 2) - 2,
+			y: game.player.y / game.options.tileHeight - 8
+		});
+	}
 }
 
 game.generateMap = function () {

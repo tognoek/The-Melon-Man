@@ -1,3 +1,28 @@
+game.collisionsDie = function () {
+	if (game.isOver) return
+	var watchTraps = []
+	var bounds = 6
+	for (var i = 0; i < game.traps.structures.length; i++) {
+		if (
+			game.traps.structures[i].x > (game.player.x / game.options.tileWidth) - bounds
+			&& game.traps.structures[i].x < (game.player.x / game.options.tileWidth) + bounds
+			&& game.traps.structures[i].y > (game.player.y / game.options.tileHeight) - bounds
+			&& game.traps.structures[i].y < (game.player.y / game.options.tileHeight) + bounds
+		) {
+			watchTraps.push(game.traps.structures[i])
+		}
+	}
+	// console.log(watchTraps.length)
+	for (var i = 0; i < watchTraps.length; i++) {
+		if (game.player.x / game.options.tileWidth - 0.3 >= watchTraps[i].x + 0.3
+			&& game.player.x / game.options.tileWidth - 0.7 <= watchTraps[i].x  + 0.7
+			&& game.player.y / game.options.tileHeight + 1 >= watchTraps[i].y + 1
+			&& game.player.y / game.options.tileHeight <= watchTraps[i].y + 2) 
+			{
+				game.isOver = true
+			}
+		}
+}
 game.checkCollisions = function () {
 	// List potentially collidable entities
 	var watchTheseGuys = []

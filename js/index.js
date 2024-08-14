@@ -16,8 +16,12 @@ var game = {
 	currentPoint: document.getElementById('current_point'),
 	point: document.getElementById('point'),
 	maxPoint: document.getElementById('max_point'),
-	offset: 0,
+	offset: 3,
+	speedKnife: 0.3,
+	ponits: 0,
+	yLava: 0,
 	content: new Image(),
+	sfxGameOver: false,
 	textures: {
 		'run': {
 			image: new Image(),
@@ -59,7 +63,8 @@ var game = {
 	},
 	sounds: {
 		jump: new Audio('sounds/jump.wav'),
-		run: [new Audio('sounds/grass_0.wav'), new Audio('sounds/grass_1.wav')]
+		run: [new Audio('sounds/grass_0.wav'), new Audio('sounds/grass_1.wav')],
+		gameOver: new Audio('sounds/over.wav')
 	},
 	options: {
 		texturesPath: "textures.png",
@@ -106,6 +111,9 @@ var game = {
 		this.content.onload = onInit
 	},
 	map: {
+		structures: []
+	},
+	traps :{
 		structures: []
 	},
 	isOver: false,
