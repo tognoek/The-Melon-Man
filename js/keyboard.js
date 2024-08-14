@@ -1,4 +1,3 @@
-
 // Functions responsible for keyboard events handling
 game.moveLeft = function () {
 	if (game.isOver) return

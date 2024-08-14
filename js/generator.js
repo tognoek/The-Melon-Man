@@ -34,76 +34,94 @@ game.genrateTraps = function () {
 	}
 }
 
-game.generateMap = function () {
-	// Generate a platform for the player
+game.generateMapGrassPlatform = function(){
+	var index = this.map.structures.length;
 	this.map.structures.push({
 		name: "grassPlatform",
-		x: 0,
-		y: 0
+		x: Math.floor(Math.random() * 8),
+		y: index * -3
 	})
-	// Generate the rest of the platforms
-	for (var i = 1; i < 20; i++) {
-		this.map.structures.push({
-			name: "grassPlatform",
-			x: Math.floor(Math.random() * 8),
-			y: -i * 3
-		})
-	}
-
-	for (var i = 20; i < 40; i++) {
-		randomX = Math.floor(Math.random() * 8)
+}
+game.generateMapSnowPlatform = function(){
+	var index = this.map.structures.length;
+	randomX = Math.floor(Math.random() * 8)
 		this.map.structures.push({
 			name: "snowPlatform",
 			x: randomX,
-			y: -i * 3
+			y: index * -3
 		})
 		if (Math.floor(Math.random() * 7) == 0) {
 			this.map.structures.push({
 				name: "snowman",
 				x: randomX + Math.floor(Math.random() * 3),
-				y: -i * 3 - 1
+				y: index * -3 - 1
 			})
 		}
+}
+game.generateMapGelPlatform = function(){
+	var index = this.map.structures.length;
+	this.map.structures.push({
+		name: "gelPlatform",
+		x: Math.floor(Math.random() * 6),
+		y: index * -3
+	})
+}
+game.generateMapSeaWeedPlatform = function(){
+	var index = this.map.structures.length;
+	this.map.structures.push({
+		name: "seaWeedPlatform",
+		x: Math.floor(Math.random() * 4),
+		y: index * -3
+	})
+}
+game.generateMapEyePlatform = function(){
+	var index = this.map.structures.length;
+	this.map.structures.push({
+		name: "eyePlatform_" + Math.floor(Math.random() * 4 + 1),
+		x: Math.floor(Math.random() * 8),
+		y: index * -3
+	})
+}
+game.generateMapManHoldingPlatform = function(){
+	var index = this.map.structures.length;
+	this.map.structures.push({
+		name: "manHoldingPlatform",
+		x: Math.floor(Math.random() * 8),
+		y: index * -3
+	})
+}
+game.generateMapManLavaPlatform = function(){
+	var index = this.map.structures.length;
+	this.map.structures.push({
+		name: "lava_platform",
+		x: Math.floor(Math.random() * 8),
+		y: index * -3
+	})
+}
+game.generateMap = function (size) {
+	// Generate a platform for the player
+	this.map.structures.push({
+		name: "grassPlatform",
+		x: 0,
+		y: 0 
+	})
+	if (size == undefined){
+		size = 20;
 	}
-
-	for (var i = 40; i < 60; i++) {
-		this.map.structures.push({
-			name: "gelPlatform",
-			x: Math.floor(Math.random() * 6),
-			y: -i * 3
-		})
-	}
-
-	for (var i = 60; i < 90; i++) {
-		this.map.structures.push({
-			name: "seaWeedPlatform",
-			x: Math.floor(Math.random() * 4),
-			y: -i * 3
-		})
-	}
-
-	for (var i = 90; i < 100; i++) {
-		name = "eyePlatform_" + Math.floor(Math.random() * 4 + 1)
-		this.map.structures.push({
-			name: name,
-			x: Math.floor(Math.random() * 8),
-			y: -i * 3
-		})
-	}
-
-	for (var i = 100; i < 120; i++) {
-		this.map.structures.push({
-			name: "manHoldingPlatform",
-			x: Math.floor(Math.random() * 8),
-			y: -i * 3
-		})
-	}
-
-	for (var i = 120; i < 140; i++) {
-		this.map.structures.push({
-			name: "lava_platform",
-			x: Math.floor(Math.random() * 8),
-			y: -i * 3
-		})
+	for (var i = 0; i < size; i++){
+		var random = Math.floor(Math.random() * 6)
+		if (random== 0) {
+            this.generateMapSnowPlatform();
+        } else if (random == 1) {
+            this.generateMapGelPlatform();
+        } else if (random == 2) {
+            this.generateMapSeaWeedPlatform();
+        } else if (random == 3) {
+            this.generateMapEyePlatform();
+        } else if (random == 4) {
+            this.generateMapManHoldingPlatform();
+        } else if (random == 5) {
+            this.generateMapManLavaPlatform();
+        } else this.generateMapGrassPlatform();
 	}
 }

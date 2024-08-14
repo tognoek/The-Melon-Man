@@ -18,7 +18,7 @@ var game = {
 	maxPoint: document.getElementById('max_point'),
 	offset: 3,
 	speedKnife: 0.3,
-	ponits: 0,
+	points: 0,
 	yLava: 0,
 	content: new Image(),
 	sfxGameOver: false,

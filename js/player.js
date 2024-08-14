@@ -93,12 +93,16 @@ function loop() {
 		game.requestRedraw()
 	}
 	if (!game.isOver) {
-		game.speedKnife = 0.3 + Math.floor(game.ponits / 30) * 0.05;
+		console.log(game.map.structures.length)
+		game.speedKnife = 0.3 + Math.floor(game.points / 30) * 0.05;
+		if (game.points > game.map.structures.length - 5){
+			game.generateMap(20)
+		}
 		game.genrateTraps();
 		for (var i = 0; i < game.traps.structures.length; i++) {
 			game.traps.structures[i].y += game.speedKnife;
 		}
-		game.yLava += 0.1
+		game.yLava += 0.05
 		if (game.options.canvasHeight - game.options.maptileHeight * 2 - game.yLava + 12 <= game.options.canvasHeight / 2 + game.options.tileHeight / 2){
 			game.isOver = true;
 		}

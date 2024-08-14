@@ -116,8 +116,8 @@ game.redraw = function () {
 	// Draw the player
 	game.drawPlayer()
 	game.currentPoint.innerHTML = "Current points: " + Math.round(-game.player.y / (3 * game.options.tileHeight))
-	game.ponits = Math.round(-game.player.highestY / (3 * game.options.tileHeight))
-	game.point.innerHTML = "Points: " + game.ponits
+	game.points = Math.round(-game.player.highestY / (3 * game.options.tileHeight))
+	game.point.innerHTML = "Points: " + game.points
 	game.numberMaxPoint = Math.max(game.numberMaxPoint, Math.round(-game.player.highestY / (3 * game.options.tileHeight)))
 	game.maxPoint.innerHTML = "Max points: " + game.numberMaxPoint
 	document.cookie = "numberMaxPoint=" + game.numberMaxPoint
