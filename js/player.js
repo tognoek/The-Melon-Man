@@ -93,7 +93,6 @@ function loop() {
 		game.requestRedraw()
 	}
 	if (!game.isOver) {
-		console.log(game.map.structures.length)
 		game.speedKnife = 0.3 + Math.floor(game.points / 30) * 0.05;
 		if (game.points > game.map.structures.length - 5){
 			game.generateMap(20)
@@ -119,6 +118,7 @@ function loop() {
 		}
 	}
 	game.collisionsDie();
+	game.collisionsFrutis();
 	if (game.isOver) {
 		return;
 	}

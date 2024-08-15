@@ -1,17 +1,17 @@
 // The spaghetti code masterpiece
 function getCookie(name) {
-    let cookieArr = document.cookie.split(";");
-    for(let i = 0; i < cookieArr.length; i++) {
-        let cookie = cookieArr[i].trim();
-        if (cookie.indexOf(name + "=") === 0) {
-            return cookie.substring(name.length + 1);
-        }
-    }
-    return null;
+	let cookieArr = document.cookie.split(";");
+	for (let i = 0; i < cookieArr.length; i++) {
+		let cookie = cookieArr[i].trim();
+		if (cookie.indexOf(name + "=") === 0) {
+			return cookie.substring(name.length + 1);
+		}
+	}
+	return null;
 }
 var game = {
 	canvas: document.getElementById('canvas'),
-	context: this.canvas.getContext('2d', {alpha: false}),
+	context: this.canvas.getContext('2d', { alpha: false }),
 	counter: document.getElementById('counter'),
 	currentPoint: document.getElementById('current_point'),
 	point: document.getElementById('point'),
@@ -19,8 +19,10 @@ var game = {
 	offset: 3,
 	speedKnife: 0.3,
 	points: 0,
+	frutis: 0,
 	yLava: 0,
 	content: new Image(),
+	bananaImages: new Image(),
 	sfxGameOver: false,
 	textures: {
 		'run': {
@@ -30,36 +32,36 @@ var game = {
 		},
 		'idle': {
 			image: new Image(),
-            loaded: false,
+			loaded: false,
 			ratioFrame: 1
 		},
 		'jump': {
 			image: new Image(),
-            loaded: false,
+			loaded: false,
 			ratioFrame: 1
-        },
+		},
 		'fall': {
-            image: new Image(),
-            loaded: false,
+			image: new Image(),
+			loaded: false,
 			ratioFrame: 1
-        },
+		},
 		'doublejump': {
 			image: new Image(),
-            loaded: false,
+			loaded: false,
 			ratioFrame: 5
-        }
+		}
 
 	},
 	drawPending: false,
 	backgrounds: {
-			'sky': {
-				image: new Image(),
-				loaded: false
-			},
-			'trees': {
-				image: new Image(),
-				loaded: false
-			}
+		'sky': {
+			image: new Image(),
+			loaded: false
+		},
+		'trees': {
+			image: new Image(),
+			loaded: false
+		}
 	},
 	sounds: {
 		jump: new Audio('sounds/jump.wav'),
@@ -73,6 +75,7 @@ var game = {
 		doublejumpPath: "player/doublejump.png",
 		fallPath: "player/fall.png",
 		idlePath: "player/idle.png",
+		bananasPath: "bananas.png",
 		groundHeight: 50,
 		tileWidth: 32,
 		tileHeight: 32,
@@ -88,7 +91,7 @@ var game = {
 		this.canvas.height = this.options.canvasHeight
 		this.context.imageSmoothingEnabled = false
 
-    this.backgrounds['sky'].image.src = "background.png"
+		this.backgrounds['sky'].image.src = "background.png"
 		this.backgrounds['trees'].image.src = "trees.png"
 
 		for (var key in this.backgrounds) {
@@ -104,16 +107,22 @@ var game = {
 		this.textures['idle'].image.src = this.options.idlePath
 		for (var key in this.textures) {
 			this.textures[key].image.onload = function (currentKey) {
-                this.textures[currentKey].loaded = true
-            }.bind(this, key)
+				this.textures[currentKey].loaded = true
+			}.bind(this, key)
 		}
-		this.content.src = this.options.texturesPath
+
+		this.bananaImages.src = this.options.bananasPath
+
+		this.content.src = this.options.texturesPath 
 		this.content.onload = onInit
 	},
 	map: {
 		structures: []
 	},
-	traps :{
+	bananas: {
+		structures: []
+	},
+	traps: {
 		structures: []
 	},
 	isOver: false,

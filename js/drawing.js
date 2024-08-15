@@ -15,6 +15,12 @@ game.drawTile = function (tileColumn, tileRow, x, y) {
 }
 
 game.drawStructure = function (name, x, y) {
+	var structure = game.structures[name]
+	for (var i = 0; i < structure.length; i++) {
+		game.drawTile(structure[i].tileColumn, structure[i].tileRow, structure[i].x + x, structure[i].y + y)
+	}
+}
+game.drawLava = function(){
 	var widthElement = game.options.maptileWidth * 3;
 	var heighthElement = game.options.maptileHeight * 2; 
 	for (var i = 0; i < 7; i++){
@@ -34,12 +40,28 @@ game.drawStructure = function (name, x, y) {
 			widthLava += widthElement;
 		}
 	}
-	var structure = game.structures[name]
-	for (var i = 0; i < structure.length; i++) {
-		game.drawTile(structure[i].tileColumn, structure[i].tileRow, structure[i].x + x, structure[i].y + y)
+}
+game.drawBananas = function(){
+	for (var i = 0; i < game.bananas.structures.length; i++) {
+		if (game.bananas.structures[i].live){
+			var x = game.bananas.structures[i].x
+			var y = game.bananas.structures[i].y
+			game.bananas.structures[i].frame += 1
+			game.bananas.structures[i].frame %= 17
+			game.context.drawImage(
+				game.bananaImages,
+				game.bananas.structures[i].frame * game.options.tileWidth,
+				0 * game.options.tileHeight,
+				game.options.tileWidth,
+				game.options.tileHeight,
+				x * game.options.tileWidth - Math.round(game.player.x) + Math.round(game.options.canvasWidth / 2 + game.options.tileWidth / 2),
+				y * game.options.tileHeight - Math.round(game.player.y) + Math.round(game.options.canvasHeight / 2 + game.options.tileHeight / 2),
+				game.options.tileWidth,
+				game.options.tileHeight
+			)
+		}
 	}
 }
-
 game.drawPlayer = function () {
 	// actualPlayerTile = game.player.animations[game.player.direction][game.player.animationFrameNumber % 4]
 	game.player.animationFrameNumber = game.player.animationFrameNumber % Math.floor(game.player.animations[game.player.direction] * game.textures[game.player.direction].ratioFrame)
@@ -112,13 +134,17 @@ game.redraw = function () {
 		// console.log(structuresToDraw[i].name, structuresToDraw[i].x, structuresToDraw[i].y)
 		game.drawStructure(structuresToDraw[i].name, structuresToDraw[i].x, structuresToDraw[i].y)
 	}
-
+	// Draw the bananas
+	game.drawBananas()
+	// Draw the lava
+	game.drawLava()
 	// Draw the player
 	game.drawPlayer()
-	game.currentPoint.innerHTML = "Current points: " + Math.round(-game.player.y / (3 * game.options.tileHeight))
+
+	game.currentPoint.innerHTML = "Current points: " + (Math.round(-game.player.y / (3 * game.options.tileHeight)) + game.frutis)
 	game.points = Math.round(-game.player.highestY / (3 * game.options.tileHeight))
-	game.point.innerHTML = "Points: " + game.points
-	game.numberMaxPoint = Math.max(game.numberMaxPoint, Math.round(-game.player.highestY / (3 * game.options.tileHeight)))
+	game.point.innerHTML = "Points: " + (game.points + game.frutis)
+	game.numberMaxPoint = Math.max(game.numberMaxPoint, game.points + game.frutis)
 	game.maxPoint.innerHTML = "Max points: " + game.numberMaxPoint
 	document.cookie = "numberMaxPoint=" + game.numberMaxPoint
 	game.counter.innerHTML = "A game by Karol Swierczek | Controls: A, D / arrows and SPACE | Points: " + Math.round(-game.player.highestY / (3 * game.options.tileHeight)), game.canvas.width - 50, game.canvas.height - 12

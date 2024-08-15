@@ -23,6 +23,29 @@ game.collisionsDie = function () {
 			}
 		}
 }
+game.collisionsFrutis = function () {
+	if (game.isOver) return
+	var watchBananas = []
+	var bounds = 6
+	for (var i = 0; i < game.bananas.structures.length; i++) {
+		if (
+			game.bananas.structures[i].x > (game.player.x / game.options.tileWidth) - bounds
+			&& game.bananas.structures[i].x < (game.player.x / game.options.tileWidth) + bounds
+			&& game.bananas.structures[i].y > (game.player.y / game.options.tileHeight) - bounds
+			&& game.bananas.structures[i].y < (game.player.y / game.options.tileHeight) + bounds
+			&& game.bananas.structures[i].live
+		) {
+			if (game.player.x / game.options.tileWidth - 0.3 >= game.bananas.structures[i].x + 0.3
+				&& game.player.x / game.options.tileWidth - 0.7 <= game.bananas.structures[i].x  + 0.7
+				&& game.player.y / game.options.tileHeight >= game.bananas.structures[i].y + 0.3
+				&& game.player.y / game.options.tileHeight - 1 <= game.bananas.structures[i].y + 1 -0.3) 
+				{
+					game.frutis += 4;
+					game.bananas.structures[i].live = false;
+				}
+		}
+	}
+}
 game.checkCollisions = function () {
 	// List potentially collidable entities
 	var watchTheseGuys = []

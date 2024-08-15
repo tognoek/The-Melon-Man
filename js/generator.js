@@ -98,6 +98,18 @@ game.generateMapManLavaPlatform = function(){
 		y: index * -3
 	})
 }
+game.genereteItemBanana = function (){
+	for (var i = 0; i < 3; i++){
+		var index = this.bananas.structures.length;
+		this.bananas.structures.push({
+			name: "banana",
+			live: true,
+			frame: Math.floor(Math.round(Math.random() * 16)),
+			x: Math.floor(Math.random() * 8),
+			y: index * -3 + Math.floor(Math.random() * 2) - 6
+		})
+	}
+}
 game.generateMap = function (size) {
 	// Generate a platform for the player
 	this.map.structures.push({
@@ -109,6 +121,7 @@ game.generateMap = function (size) {
 		size = 20;
 	}
 	for (var i = 0; i < size; i++){
+		this.genereteItemBanana();
 		var random = Math.floor(Math.random() * 6)
 		if (random== 0) {
             this.generateMapSnowPlatform();
