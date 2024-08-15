@@ -5,7 +5,7 @@
 The goal is to jump through randomly-generated platforms and get as high as possible.
 Use space to jump, and A, D or arrows to move left / right.
 
-[> DEMO <](https://karolsw3.github.io/The-Melon-Man/)
+[> DEMO <](https://tognoek.github.io/The-Melon-Man/)
 
 # For contributors
 
