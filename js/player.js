@@ -86,6 +86,10 @@ game.player = {
 }
 
 function loop() {
+	if (!game.isRun){
+		console.log("is Menu")
+		return;
+	}
 	if (game.player.direction == "idle") {
 		if (!game.isOver) {
 			game.player.animationFrameNumber++
@@ -123,5 +127,4 @@ function loop() {
 		return;
 	}
 }
-
 setInterval(loop, 60);

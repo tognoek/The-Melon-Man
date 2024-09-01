@@ -24,6 +24,31 @@ game.structures = {
 	"knife" : [{tileColumn: 6, tileRow: 3, x: 0, y: 0, collidable: true}, { tileColumn: 6, tileRow: 2, x: 0, y: -1, collidable: true }],
 	"lava" : [{tileColumn: 4, tileRow: 4, x: 0, y: 0, collidable: true}]
 }
+
+game.reset = function() {
+	this.player.x = 54;
+	this.player.y = 0;
+	this.player.direction = "idle";
+	this.player.vectorX = 1;
+	this.player.isInAir = false;
+	this.player.startedJump = false;
+	this.player.countJump = 0;
+	this.player.highestY = 0;
+	this.offset = 3;
+	this.speedKnife = 0.3;
+	this.points = 0;
+	this.frutis = 0;
+	this.yLava = 0;
+	this.map = {
+		structures: []
+	}
+	this.bananas = {
+		structures: []
+	}
+	this.traps = {
+		structures: []
+	}
+}
 game.genrateTraps = function () {
 	if (game.offset % 31 == 0){
 		this.traps.structures.push({
@@ -110,6 +135,7 @@ game.genereteItemBanana = function (){
 		})
 	}
 }
+
 game.generateMap = function (size) {
 	// Generate a platform for the player
 	this.map.structures.push({

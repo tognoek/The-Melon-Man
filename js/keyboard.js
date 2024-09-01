@@ -4,7 +4,7 @@ game.moveLeft = function () {
 	game.player.vectorX = -1
 	game.clearMoveIntervals()
 	game.player.moveLeftInterval = setInterval(function () {
-		if (game.player.direction == "idle"){
+		if (game.player.direction == "idle") {
 			game.player.direction = "run";
 			game.player.animationFrameNumber = 0;
 		}
@@ -33,7 +33,7 @@ game.moveRight = function () {
 	game.player.vectorX = 1
 	game.clearMoveIntervals()
 	game.player.moveRightInterval = setInterval(function () {
-		if (game.player.direction == "idle"){
+		if (game.player.direction == "idle") {
 			game.player.direction = "run";
 			game.player.animationFrameNumber = 0;
 		}
@@ -61,21 +61,31 @@ game.clearMoveIntervals = function () {
 }
 
 game.keydown = function (event) {
-	if (game.isOver) return;
+	if (game.isOver) {
+		if (event.keyCode == 82){
+		    game.init(function () {
+                game.reset();
+                game.generateMap();
+                game.requestRedraw();
+            });
+			game.isOver = false;
+		}
+		return
+	};
 	if (!game.pressedKeys[event.keyCode]) { // Prevent key repeating
 		switch (event.keyCode) {
-		case 65:
-		case 37:
-			game.moveLeft()
-			break
-		case 68:
-		case 39:
-			game.moveRight()
-			break
-		case 32:
-			game.player.jump()
-			break
-	}
+			case 65:
+			case 37:
+				game.moveLeft()
+				break
+			case 68:
+			case 39:
+				game.moveRight()
+				break
+			case 32:
+				game.player.jump()
+				break
+		}
 		game.pressedKeys[event.keyCode] = true
 	}
 }
@@ -95,5 +105,5 @@ game.keyup = function (event) {
 			game.player.direction = "idle";
 			game.player.animationFrameNumber = 0;
 			break
-		}
+	}
 }

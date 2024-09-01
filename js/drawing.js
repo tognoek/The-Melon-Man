@@ -157,12 +157,13 @@ game.requestRedraw = function () {
 	}
 
 	if (game.isOver) {
+		console.log("Die")
 		clearInterval(this.player.fallInterval)
 		game.context.font = "30px superscript"
 		game.context.textAlign = "center"
 		game.context.fillStyle = "black"
 		game.context.fillText("Game over!", game.canvas.width / 2, game.canvas.height / 2)
 		game.context.font = "15px Georgia"
-		game.context.fillText("(Refresh the page to restart)", game.canvas.width / 2, game.canvas.height / 2 + 50)
+		game.context.fillText("Press R to play again", game.canvas.width / 2, game.canvas.height / 2 + 50)
 	}
 }
