@@ -87,7 +87,6 @@ game.player = {
 
 function loop() {
 	if (!game.isRun){
-		console.log("is Menu")
 		return;
 	}
 	if (game.player.direction == "idle") {

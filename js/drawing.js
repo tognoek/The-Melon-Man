@@ -157,7 +157,6 @@ game.requestRedraw = function () {
 	}
 
 	if (game.isOver) {
-		console.log("Die")
 		clearInterval(this.player.fallInterval)
 		game.context.font = "30px superscript"
 		game.context.textAlign = "center"

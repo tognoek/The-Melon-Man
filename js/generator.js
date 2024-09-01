@@ -39,6 +39,7 @@ game.reset = function() {
 	this.points = 0;
 	this.frutis = 0;
 	this.yLava = 0;
+	this.sfxGameOver = false,
 	this.map = {
 		structures: []
 	}
